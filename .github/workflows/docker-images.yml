@@ -17,6 +17,7 @@ permissions:
 
 jobs:
   matrix:
+    name: Prepare build matrix
     runs-on: ubuntu-latest
     outputs:
       rows: ${{ steps.generate.outputs.rows }}
@@ -36,6 +37,7 @@ jobs:
           echo "rows=$rows_json" >> "$GITHUB_OUTPUT"
 
   build:
+    name: Build ${{ matrix.config_name }} / ${{ matrix.image_name }} / ${{ matrix.version }}
     needs: matrix
     runs-on: ubuntu-latest
     strategy:

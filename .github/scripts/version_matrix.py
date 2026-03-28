@@ -12,12 +12,15 @@ VERSIONS_DIR = REPO_ROOT / "versions"
 def _load_json(path: Path) -> Any:
     with path.open("r", encoding="utf-8") as handle:
         return json.load(handle)
+
+
 def _matrix_rows(path: Path, data: dict[str, Any]) -> list[dict[str, str]]:
     source = data["source"]
     rows: list[dict[str, str]] = []
     for image in sorted(data["images"], key=lambda item: item["name"]):
         rows.append(
             {
+                "config_name": path.stem,
                 "versions_file": str(path.relative_to(REPO_ROOT)),
                 "version": data["version"],
                 "source_repo": source["repo"],
