@@ -37,20 +37,20 @@ jobs:
           echo "rows=$rows_json" >> "$GITHUB_OUTPUT"
 
   build:
-    name: Build ${{ matrix.platform }} (${{ matrix.image.config_name }} / ${{ matrix.image.image_name }} / ${{ matrix.image.version }})
+    name: Build ${{ matrix.platform.value }} (${{ matrix.image.config_name }} / ${{ matrix.image.image_name }} / ${{ matrix.image.version }})
     needs: matrix
     strategy:
       fail-fast: false
       matrix:
-        include:
+        platform:
           - runner: ubuntu-24.04
-            platform: linux/amd64
-            platform_suffix: amd64
+            value: linux/amd64
+            suffix: amd64
           - runner: ubuntu-24.04-arm
-            platform: linux/arm64
-            platform_suffix: arm64
+            value: linux/arm64
+            suffix: arm64
         image: ${{ fromJson(needs.matrix.outputs.rows).include }}
-    runs-on: ${{ matrix.runner }}
+    runs-on: ${{ matrix.platform.runner }}
     env:
       REGISTRY_IMAGE: ghcr.io/${{ github.repository_owner }}/${{ matrix.image.image_name }}
       VERSION: ${{ matrix.image.version }}
@@ -82,7 +82,7 @@ jobs:
         with:
           images: ${{ env.REGISTRY_IMAGE }}
           tags: |
-            type=raw,value=${{ env.VERSION }}-${{ matrix.platform_suffix }}
+            type=raw,value=${{ env.VERSION }}-${{ matrix.platform.suffix }}
 
       - name: Registry login
         if: github.event_name == 'push'
@@ -98,12 +98,10 @@ jobs:
         with:
           context: upstream
           file: upstream/${{ env.DOCKERFILE }}
-          platforms: ${{ matrix.platform }}
+          platforms: ${{ matrix.platform.value }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           push: ${{ github.event_name == 'push' }}
-          cache-from: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.platform_suffix }}
-          cache-to: type=registry,ref=${{ env.REGISTRY_IMAGE }}:buildcache-${{ matrix.platform_suffix }},mode=max
 
   merge:
     name: Merge manifest (${{ matrix.config_name }} / ${{ matrix.image_name }} / ${{ matrix.version }})
