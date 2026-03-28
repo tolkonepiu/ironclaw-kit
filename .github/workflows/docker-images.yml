@@ -3,12 +3,12 @@ name: docker-images
 on:
   pull_request:
     paths:
-      - "versions/*.json"
+      - "images/*.json"
   push:
     branches:
       - main
     paths:
-      - "versions/*.json"
+      - "images/*.json"
   workflow_dispatch:
 
 permissions:
@@ -50,6 +50,14 @@ jobs:
       SOURCE_TAG: ${{ matrix.source_tag }}
       DOCKERFILE: ${{ matrix.dockerfile }}
     steps:
+      - name: Parse version parts
+        id: version_parts
+        run: |
+          major="$(echo "$VERSION" | cut -d. -f1)"
+          minor="$(echo "$VERSION" | cut -d. -f2)"
+          echo "major=$major" >> "$GITHUB_OUTPUT"
+          echo "minor=$minor" >> "$GITHUB_OUTPUT"
+
       - name: Checkout repository
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6
 
@@ -68,7 +76,18 @@ jobs:
         with:
           images: ghcr.io/${{ github.repository_owner }}/${{ env.IMAGE_NAME }}
           tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
             type=raw,value=${{ env.VERSION }}
+            type=raw,value=${{ steps.version_parts.outputs.major }}.${{ steps.version_parts.outputs.minor }}
+            type=raw,value=${{ steps.version_parts.outputs.major }}
+
+      - name: Registry login
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3.7.0
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push image
         uses: docker/build-push-action@d08e5c354a6adb9ed34480a06d141179aa583294 # v7
@@ -78,4 +97,4 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          push: false
+          push: ${{ github.event_name == 'push' }}

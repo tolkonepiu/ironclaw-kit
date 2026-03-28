@@ -6,7 +6,7 @@ from typing import Any
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-VERSIONS_DIR = REPO_ROOT / "versions"
+IMAGES_DIR = REPO_ROOT / "images"
 
 
 def _load_json(path: Path) -> Any:
@@ -21,7 +21,7 @@ def _matrix_rows(path: Path, data: dict[str, Any]) -> list[dict[str, str]]:
         rows.append(
             {
                 "config_name": path.stem,
-                "versions_file": str(path.relative_to(REPO_ROOT)),
+                "images_file": str(path.relative_to(REPO_ROOT)),
                 "version": data["version"],
                 "source_repo": source["repo"],
                 "source_tag": source["tag"],
@@ -33,9 +33,9 @@ def _matrix_rows(path: Path, data: dict[str, Any]) -> list[dict[str, str]]:
 
 
 def build_matrix() -> dict[str, list[dict[str, str]]]:
-    files = sorted(VERSIONS_DIR.glob("*.json"), key=lambda item: item.name)
+    files = sorted(IMAGES_DIR.glob("*.json"), key=lambda item: item.name)
     if not files:
-        raise ValueError("No versions JSON files found in versions/*.json")
+        raise ValueError("No images JSON files found in images/*.json")
 
     rows: list[dict[str, str]] = []
 
