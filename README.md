@@ -1,0 +1,44 @@
+# claw-images
+
+Unofficial container image definitions for claw projects that do not publish
+official images.
+
+## Supported projects
+
+| Project                                         | Docker image                         | Latest                                      | Other versions                                                                                       |
+| ----------------------------------------------- | ------------------------------------ | ------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| [CoPaw](https://github.com/agentscope-ai/CoPaw) | `ghcr.io/tolkonepiu/copaw`           | `ghcr.io/tolkonepiu/copaw:latest`           | [copaw packages](https://github.com/tolkonepiu/claw-images/pkgs/container/copaw)                     |
+| [ironclaw](https://github.com/nearai/ironclaw)  | `ghcr.io/tolkonepiu/ironclaw`        | `ghcr.io/tolkonepiu/ironclaw:latest`        | [ironclaw packages](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw)               |
+| [ironclaw](https://github.com/nearai/ironclaw)  | `ghcr.io/tolkonepiu/ironclaw-worker` | `ghcr.io/tolkonepiu/ironclaw-worker:latest` | [ironclaw-worker packages](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw-worker) |
+| [nanobot](https://github.com/HKUDS/nanobot)     | `ghcr.io/tolkonepiu/nanobot`         | `ghcr.io/tolkonepiu/nanobot:latest`         | [nanobot packages](https://github.com/tolkonepiu/claw-images/pkgs/container/nanobot)                 |
+
+> [!NOTE] Images are published for `amd64` and `arm64`. Tags like
+> `v0.23.0-amd64` and `v0.23.0-arm64` are architecture-specific, while `v0.23.0`
+> and `latest` are multi-arch tags.
+
+## Docker examples
+
+Use `ironclaw` as a reference for the available tag formats:
+
+```bash
+# Latest multi-arch image
+docker pull ghcr.io/tolkonepiu/ironclaw:latest
+
+# Versioned multi-arch image
+docker pull ghcr.io/tolkonepiu/ironclaw:v0.23.0
+
+# Architecture-specific image for amd64
+docker pull ghcr.io/tolkonepiu/ironclaw:v0.23.0-amd64
+
+# Architecture-specific image for arm64
+docker pull ghcr.io/tolkonepiu/ironclaw:v0.23.0-arm64
+```
+
+## Adding a new image definition
+
+1. Create a new file in `images/`, for example `images/<project>.json`.
+2. Set `version`, `source.repo`, and `source.tag` to the upstream release you
+   want to build.
+3. Add one or more entries under `images[]` with the final image name and the
+   Dockerfile path in the upstream repository.
+4. Open a pull request to validate the build.
