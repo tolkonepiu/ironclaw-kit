@@ -20,7 +20,6 @@ def _matrix_rows(path: Path, data: dict[str, Any]) -> list[dict[str, str]]:
     for image in sorted(data["images"], key=lambda item: item["name"]):
         rows.append(
             {
-                "config_name": path.stem,
                 "images_file": str(path.relative_to(REPO_ROOT)),
                 "version": data["version"],
                 "source_repo": source["repo"],

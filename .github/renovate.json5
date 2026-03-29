@@ -5,7 +5,7 @@
   customManagers: [
     {
       customType: "regex",
-      fileMatch: ["^images/.*\\.json$"],
+      fileMatch: ["^images/ironclaw.json$"],
       matchStringsStrategy: "any",
       matchStrings: [
         '"version"\\s*:\\s*"v(?<currentValue>\\d+\\.\\d+\\.\\d+)"',

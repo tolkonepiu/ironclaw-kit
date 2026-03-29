@@ -37,7 +37,7 @@ jobs:
           echo "rows=$rows_json" >> "$GITHUB_OUTPUT"
 
   build:
-    name: Build ${{ matrix.platform.value }} (${{ matrix.image.config_name }} / ${{ matrix.image.image_name }} / ${{ matrix.image.version }})
+    name: Build ${{ matrix.image.image_name }} (${{ matrix.image.version }} / ${{ matrix.platform.value }})
     needs: matrix
     strategy:
       fail-fast: false
@@ -96,7 +96,7 @@ jobs:
           push: ${{ github.event_name == 'push' }}
 
   merge:
-    name: Merge manifest (${{ matrix.config_name }} / ${{ matrix.image_name }} / ${{ matrix.version }})
+    name: Merge manifest (${{ matrix.image_name }} / ${{ matrix.version }})
     if: github.event_name == 'push'
     needs:
       - matrix
