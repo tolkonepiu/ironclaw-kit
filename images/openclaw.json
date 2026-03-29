@@ -1,0 +1,17 @@
+{
+  "version": "v2026.3.28",
+  "source": {
+    "repo": "https://github.com/openclaw/openclaw.git",
+    "tag": "v2026.3.28"
+  },
+  "images": [
+    {
+      "name": "openclaw-sandbox",
+      "dockerfile": "Dockerfile.sandbox"
+    },
+    {
+      "name": "openclaw-sandbox-browser",
+      "dockerfile": "Dockerfile.sandbox-browser"
+    }
+  ]
+}
