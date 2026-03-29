@@ -5,12 +5,14 @@ official images.
 
 ## Supported images
 
-| Name               | Description                                | Project                                         | Docker image                         | Versions                                                                               |
-| ------------------ | ------------------------------------------ | ----------------------------------------------- | ------------------------------------ | -------------------------------------------------------------------------------------- |
-| `copaw`            | Personal AI assistant, easy to deploy      | [CoPaw](https://github.com/agentscope-ai/CoPaw) | `ghcr.io/tolkonepiu/copaw`           | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/copaw)                 |
-| `ironclaw`         | OpenClaw-inspired Rust implementation      | [ironclaw](https://github.com/nearai/ironclaw)  | `ghcr.io/tolkonepiu/ironclaw`        | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw)              |
-| `ironclaw-worker`  | Worker image for ironclaw                  | [ironclaw](https://github.com/nearai/ironclaw)  | `ghcr.io/tolkonepiu/ironclaw-worker` | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw-worker)       |
-| `nanobot`          | Ultra-lightweight OpenClaw implementation  | [nanobot](https://github.com/HKUDS/nanobot)     | `ghcr.io/tolkonepiu/nanobot`         | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/nanobot)               |
+| Name                       | Description                               | Project                                          | Docker image                                  | Versions                                                                                 |
+| -------------------------- | ----------------------------------------- | ------------------------------------------------ | --------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `copaw`                    | Personal AI assistant, easy to deploy     | [CoPaw](https://github.com/agentscope-ai/CoPaw)  | `ghcr.io/tolkonepiu/copaw`                    | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/copaw)                    |
+| `ironclaw`                 | OpenClaw-inspired Rust implementation     | [ironclaw](https://github.com/nearai/ironclaw)   | `ghcr.io/tolkonepiu/ironclaw`                 | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw)                 |
+| `ironclaw-worker`          | Worker image for ironclaw                 | [ironclaw](https://github.com/nearai/ironclaw)   | `ghcr.io/tolkonepiu/ironclaw-worker`          | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/ironclaw-worker)          |
+| `nanobot`                  | Ultra-lightweight OpenClaw implementation | [nanobot](https://github.com/HKUDS/nanobot)      | `ghcr.io/tolkonepiu/nanobot`                  | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/nanobot)                  |
+| `openclaw-sandbox`         | OpenClaw sandbox base image               | [OpenClaw](https://github.com/openclaw/openclaw) | `ghcr.io/tolkonepiu/openclaw-sandbox`         | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/openclaw-sandbox)         |
+| `openclaw-sandbox-browser` | OpenClaw sandbox image with browser       | [OpenClaw](https://github.com/openclaw/openclaw) | `ghcr.io/tolkonepiu/openclaw-sandbox-browser` | [All](https://github.com/tolkonepiu/claw-images/pkgs/container/openclaw-sandbox-browser) |
 
 > [!NOTE]
 >

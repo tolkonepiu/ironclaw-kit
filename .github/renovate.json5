@@ -42,6 +42,19 @@
       extractVersionTemplate: "^v?(?<version>\\d+\\.\\d+\\.\\d+(?:\\.post\\d+)?)$",
       versioningTemplate: "pep440",
     },
+    {
+      customType: "regex",
+      fileMatch: ["^images/openclaw.json$"],
+      matchStringsStrategy: "any",
+      matchStrings: [
+        '"version"\\s*:\\s*"v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"',
+        '"tag"\\s*:\\s*"v?(?<currentValue>\\d+\\.\\d+\\.\\d+)"',
+      ],
+      depNameTemplate: "openclaw/openclaw",
+      datasourceTemplate: "github-tags",
+      extractVersionTemplate: "^v?(?<version>\\d+\\.\\d+\\.\\d+)$",
+      versioningTemplate: "semver-coerced",
+    },
   ],
   packageRules: [
     {
@@ -58,6 +71,11 @@
       matchManagers: ["custom.regex"],
       matchDepNames: ["agentscope-ai/CoPaw"],
       groupName: "agentscope-ai/CoPaw version",
+    },
+    {
+      matchManagers: ["custom.regex"],
+      matchDepNames: ["openclaw/openclaw"],
+      groupName: "openclaw/openclaw version",
     },
     {
       matchUpdateTypes: ["minor", "patch", "pin", "digest"],
