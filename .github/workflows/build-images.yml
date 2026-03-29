@@ -74,7 +74,7 @@ jobs:
           fi
 
   build:
-    name: Build ${{ matrix.image.image_name }} (${{ matrix.image.version }} / ${{ matrix.platform.value }})
+    name: Build ${{ matrix.image.image_name }} (${{ matrix.image.version }}, ${{ matrix.platform.value }})
     if: needs.matrix.outputs.has_rows == 'true'
     needs: matrix
     strategy:
@@ -134,7 +134,7 @@ jobs:
           push: ${{ github.event_name == 'push' }}
 
   merge:
-    name: Merge manifest (${{ matrix.image_name }} / ${{ matrix.version }})
+    name: Merge manifest ${{ matrix.image_name }} (${{ matrix.version }})
     if: github.event_name == 'push' && needs.matrix.outputs.has_rows == 'true'
     needs:
       - matrix
