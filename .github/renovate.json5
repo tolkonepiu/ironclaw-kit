@@ -78,8 +78,8 @@
       groupName: "openclaw/openclaw version",
     },
     {
-      matchUpdateTypes: ["minor", "patch", "pin", "digest"],
-      automerge: false,
+      matchUpdateTypes: ["major", "minor", "patch", "pin", "digest"],
+      automerge: true,
     },
   ],
 }
