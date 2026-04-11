@@ -48,7 +48,7 @@ RUN curl -LsSf https://astral.sh/uv/install.sh | env UV_UNMANAGED_INSTALL="/usr/
 # Install Bun
 RUN curl -fsSL https://bun.com/install | env BUN_INSTALL="/usr/local" bash
 
-# Isntall PNPM
+# Install PNPM
 RUN if ! command -v pnpm >/dev/null 2>&1; then npm install -g pnpm; fi
 
 USER ${FINAL_USER}
