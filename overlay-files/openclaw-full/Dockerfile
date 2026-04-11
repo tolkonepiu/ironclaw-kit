@@ -5,7 +5,7 @@ USER root
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG PACKAGES="curl wget jq coreutils grep git ca-certificates unzip"
+ARG PACKAGES="curl wget jq coreutils grep ripgrep tree git ca-certificates unzip"
 ARG FINAL_USER=node
 
 # Prepare APT keyrings and sources directories
