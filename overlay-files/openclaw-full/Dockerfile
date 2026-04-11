@@ -8,7 +8,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ARG PACKAGES="curl wget jq coreutils grep git ca-certificates unzip"
 ARG FINAL_USER=node
 
-
 # Prepare APT keyrings and sources directories
 RUN --mount=type=cache,id=openclaw-bookworm-apt-cache,target=/var/cache/apt,sharing=locked \
     --mount=type=cache,id=openclaw-bookworm-apt-lists,target=/var/lib/apt,sharing=locked \
