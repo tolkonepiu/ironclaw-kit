@@ -10,7 +10,6 @@ on:
       - main
     paths:
       - "overlays/*.json"
-      - "overlay-files/**"
   workflow_dispatch:
 
 permissions:
@@ -26,19 +25,19 @@ jobs:
       has_rows: ${{ steps.generate.outputs.has_rows }}
     steps:
       - name: Checkout
-        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           fetch-depth: 0
 
       - name: Setup Python
-        uses: actions/setup-python@28f2168f4d98ee0445e3c6321f6e6616c83dd5ec
+        uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
         with:
           python-version: "3.x"
 
       - name: Detect changed overlay definitions for pull requests
         if: github.event_name == 'pull_request'
         id: changed_files_pr
-        uses: tj-actions/changed-files@2bb135777322059ee3a3c9239999b159ff49febc
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
         with:
           files: |
             overlays/*.json
@@ -50,7 +49,7 @@ jobs:
       - name: Detect changed overlay definitions for pushes
         if: github.event_name == 'push'
         id: changed_files_push
-        uses: tj-actions/changed-files@2bb135777322059ee3a3c9239999b159ff49febc
+        uses: tj-actions/changed-files@22103cc46bda19c2b464ffe86db46df6922fd323 # v47.0.5
         with:
           files: |
             overlays/*.json
@@ -104,14 +103,14 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@21162887f0d6e25b4e8eafb0cf44cf9bf7f6acd3
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
 
       - name: Docker metadata
         id: meta
-        uses: docker/metadata-action@c3b064c6d7c32446d6bc214ea075f1caad2de35a
+        uses: docker/metadata-action@030e881283bb7a6894de51c315a6bfe6a94e05cf # v6.0.0
         with:
           images: ${{ env.REGISTRY_IMAGE }}
           tags: |
@@ -119,7 +118,7 @@ jobs:
 
       - name: Registry login
         if: github.event_name == 'push'
-        uses: docker/login-action@ba754150c9dbbaa912ae0ac3cfba43f84195cef2
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
@@ -127,7 +126,7 @@ jobs:
 
       - name: Build and push image
         id: build
-        uses: docker/build-push-action@ef1fb9688fc3626d0fd5e462f502cbbdc6456feb
+        uses: docker/build-push-action@bcafcacb16a39f128d818304e6c9c0c18556b85f # v7.1.0
         with:
           context: ${{ env.CONTEXT }}
           file: ${{ env.DOCKERFILE }}
@@ -162,10 +161,10 @@ jobs:
           echo "minor=$minor" >> "$GITHUB_OUTPUT"
 
       - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@21162887f0d6e25b4e8eafb0cf44cf9bf7f6acd3
+        uses: docker/setup-buildx-action@4d04d5d9486b7bd6fa91e7baf45bbb4f8b9deedd # v4.0.0
 
       - name: Registry login
-        uses: docker/login-action@ba754150c9dbbaa912ae0ac3cfba43f84195cef2
+        uses: docker/login-action@4907a6ddec9925e35a0a9e82d7399ccc52663121 # v4.1.0
         with:
           registry: ghcr.io
           username: ${{ github.repository_owner }}
